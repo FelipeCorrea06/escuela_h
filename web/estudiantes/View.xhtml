@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEstudiantesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_idEstudiante}"/>
+                    <h:outputText value="#{estudiantesController.selected.idEstudiante}" title="#{bundle.ViewEstudiantesTitle_idEstudiante}"/>
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_nombreEstudiante}"/>
+                    <h:outputText value="#{estudiantesController.selected.nombreEstudiante}" title="#{bundle.ViewEstudiantesTitle_nombreEstudiante}"/>
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_documentoEstudiante}"/>
+                    <h:outputText value="#{estudiantesController.selected.documentoEstudiante}" title="#{bundle.ViewEstudiantesTitle_documentoEstudiante}"/>
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_email}"/>
+                    <h:outputText value="#{estudiantesController.selected.email}" title="#{bundle.ViewEstudiantesTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_natalicio}"/>
+                    <h:outputText value="#{estudiantesController.selected.natalicio}" title="#{bundle.ViewEstudiantesTitle_natalicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewEstudiantesLabel_idMateria}"/>
+                    <h:outputText value="#{estudiantesController.selected.idMateria}" title="#{bundle.ViewEstudiantesTitle_idMateria}"/>
+                    
+                    
+                    <br/>
+                    <br/>
+                    
+                    <h:dataTable value="#{estudiantesController.lts_mat}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriasTitle_idMateria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMateria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriasTitle_nombreMateria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreMateria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMateriasTitle_turnoMateria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.turnoMateria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{materiasController.prepareView}" value="#{bundle.ListMateriasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{materiasController.prepareEdit}" value="#{bundle.ListMateriasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{materiasController.destroy}" value="#{bundle.ListMateriasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                    
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{estudiantesController.destroyAndView}" value="#{bundle.ViewEstudiantesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewEstudiantesEditLink}"/>
+                <br />
+                <h:commandLink action="#{estudiantesController.prepareCreate}" value="#{bundle.ViewEstudiantesCreateLink}" />
+                <br />
+                <h:commandLink action="#{estudiantesController.prepareList}" value="#{bundle.ViewEstudiantesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewEstudiantesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
